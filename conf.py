@@ -9,8 +9,8 @@ db_port = 3306
 API_TOKEN_KEY = 'thisismykey'
 ALGO = 'HS256'
 
-INIT_BALANCE = 500
-SMS_COST = 1
+INIT_BALANCE = 5
+SMS_COST = 2
 
 REGISTER_MESSAGE = '''
 Wellcome {}!, you are now a new member, 
