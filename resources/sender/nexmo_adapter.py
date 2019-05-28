@@ -11,3 +11,4 @@ def send(src, dest, msg):
     # }
     # )
     print('sms sent!')
+    print(src, dest, msg)

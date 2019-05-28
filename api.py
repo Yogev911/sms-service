@@ -15,7 +15,7 @@ api = Api(app, api_version='0.1')
 api.add_resource(Login, "/login")
 api.add_resource(Sender, "/send")
 api.add_resource(Register, "/register")
-api.add_resource(Verify, "/verify")
+api.add_resource(Verify, "/verify/<string:user>/<int:pin>")
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8080)

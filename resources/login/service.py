@@ -5,8 +5,6 @@ import conf
 import traceback
 from utils import generate_token, get_data_by_token
 
-from datetime import datetime, timedelta
-
 db = SQL()
 
 
@@ -25,8 +23,12 @@ def login(request):
         if not user and password and phone:
             return "missing parameters", 401
 
-        user_id = db.get_user_by_params(user, password, phone)
-        token = generate_token(user_id, phone)
+        user_data = db.get_user_by_params(user)
+        if not user_data:
+            return 'Invalid user or password', 401
+        if not db.is_user_verified(user_data['id']):
+            return 'Account is not verified, please verify your account to start messaging via http://localhost:8080/verify/<user_id>/<pin_code>', 401
+        token = generate_token(user_data['id'], phone)
         return token, 201
 
     except:

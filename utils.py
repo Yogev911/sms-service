@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 import jwt
 import conf
+from random import randint
 
 
 def generate_token(user_id, phone):
@@ -9,6 +10,11 @@ def generate_token(user_id, phone):
         conf.API_TOKEN_KEY,
         algorithm=conf.ALGO).decode('utf-8')
 
+
 def get_data_by_token(token):
     return jwt.decode(token, conf.API_TOKEN_KEY,
                       algorithm='HS256')
+
+
+def generate_pin_code():
+    return randint(1000, 9999)
