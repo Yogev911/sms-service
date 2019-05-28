@@ -1,0 +1,8 @@
+PyJWT
+Flask_Cors==3.0.6
+Flask==1.0.2
+pymongo==3.7.2
+flask_restful_swagger_2==0.35
+gunicorn==19.0.0
+bson==0.5.8
+Sphinx==2.0.0
