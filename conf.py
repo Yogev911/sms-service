@@ -9,5 +9,3 @@ db_port = 3306
 API_TOKEN_KEY = 'thisismykey'
 ALGO = 'HS256'
 
-NEXMO_KEY = '3fdf633b'
-NEXMO_SECRET = 'mVZW9LHrKGS7IFn7'
