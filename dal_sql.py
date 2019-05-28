@@ -28,3 +28,15 @@ class SQL(object):
         self.db.commit()
         return cursor.lastrowid - 1
 
+    def get_user_by_params(self, user, password, phone):
+        with self.db.cursor() as cursor:
+            # Create a new record
+            sql = "SELECT `id` FROM `users` WHERE `name`=%s"
+            cursor.execute(sql, (user,))
+            result = cursor.fetchone()
+            if not result:
+                return self.add_user(user,password,phone)
+        # connection is not autocommit by default. So you must commit to save
+        # your changes.
+        self.db.commit()
+        return result['id']
