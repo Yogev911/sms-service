@@ -9,3 +9,5 @@ db_port = 3306
 API_TOKEN_KEY = 'thisismykey'
 ALGO = 'HS256'
 
+INIT_BALANCE = 500
+SMS_COST = 1

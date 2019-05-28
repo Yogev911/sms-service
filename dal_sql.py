@@ -3,8 +3,6 @@ import pymysql.cursors
 
 import conf
 
-cnx = None
-
 
 # Connect to the database
 
@@ -21,7 +19,7 @@ class SQL(object):
         with self.db.cursor() as cursor:
             # Create a new record
             sql = f"INSERT INTO users (name, password,phone,balance) VALUES (%s, %s,%s,%s)"
-            cursor.execute(sql, (user, password, phone, 58))
+            cursor.execute(sql, (user, password, phone, conf.INIT_BALANCE))
 
         # connection is not autocommit by default. So you must commit to save
         # your changes.
@@ -35,8 +33,40 @@ class SQL(object):
             cursor.execute(sql, (user,))
             result = cursor.fetchone()
             if not result:
-                return self.add_user(user,password,phone)
+                return self.add_user(user, password, phone)
         # connection is not autocommit by default. So you must commit to save
         # your changes.
         self.db.commit()
         return result['id']
+
+    def update_balance(self, user_id, new_balance):
+        with self.db.cursor() as cursor:
+            # Create a new record
+            sql = f"UPDATE users SET `balance` = {new_balance} WHERE `id` = {user_id}"
+            cursor.execute(sql)
+
+        # connection is not autocommit by default. So you must commit to save
+        # your changes.
+        self.db.commit()
+
+    def get_user_balance(self, user_id):
+        with self.db.cursor() as cursor:
+            # Create a new record
+            sql = f"SELECT `balance`FROM users WHERE `id`={user_id}"
+            cursor.execute(sql)
+            return cursor.fetchone()['balance']
+
+    def log_message(self, user_id, dest_number, message):
+        with self.db.cursor() as cursor:
+            # Create a new record
+            sql = f"INSERT INTO message_history (`sender_id`, `dest_number`,`message`) VALUES (%s,%s,%s)"
+            cursor.execute(sql, (user_id, dest_number, message))
+
+        # connection is not autocommit by default. So you must commit to save
+        # your changes.
+        self.db.commit()
+
+
+if __name__ == '__main__':
+    db = SQL()
+    db.log_message(10, '98765432', 'testing')
