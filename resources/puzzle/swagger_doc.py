@@ -1,3 +1,5 @@
+from resources.common_modles import Puzzle
+
 puzzle_get = {
     'tags': ['puzzle'],
     'description': 'get fresh question',
@@ -41,7 +43,7 @@ puzzle_put = {
             'name': 'answer',
             'description': 'type your answer here',
             'in': 'body',
-            'schema': 'string',
+            'schema': Puzzle,
             'required': True
         }
     ],

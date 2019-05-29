@@ -26,3 +26,12 @@ class Message(Schema):
             'type': 'string'
         }
     }
+
+
+class Puzzle(Schema):
+    type = 'object'
+    properties = {
+        'answer': {
+            'type': 'string'
+        }
+    }
