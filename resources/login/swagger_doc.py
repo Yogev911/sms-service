@@ -1,26 +1,14 @@
+from resources.common_modles import UserModel
+
 login_post = {
     'tags': ['login'],
     'description': 'login new user',
     'parameters': [
         {
             'name': 'user',
-            'description': 'Request users username',
+            'description': 'Request users credentials',
             'in': 'body',
-            'schema': 'string',
-            'required': True,
-        },
-        {
-            'name': 'password',
-            'description': 'Request users password',
-            'in': 'body',
-            'schema': 'string',
-            'required': True
-        },
-        {
-            'name': 'phone',
-            'description': 'Request users phone',
-            'in': 'body',
-            'schema': 'string',
+            'schema': UserModel,
             'required': True
         }
     ],
