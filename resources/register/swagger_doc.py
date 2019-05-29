@@ -32,7 +32,10 @@ register_post = {
             'description': 'User already registered'
         },
         '406': {
-            'description': 'Phone number is incorrect'
+            'description': 'Phone number or other params are incorrect'
+        },
+        '501': {
+            'description': 'Internal server error'
         }
     }
 }

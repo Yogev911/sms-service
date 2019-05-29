@@ -2,11 +2,10 @@ import traceback
 
 from dal_sql import SQL
 
-db = SQL()
-
 
 def verify(user, pin):
     try:
+        db = SQL()
         user_data = db.get_user_by_params(user)
 
         if db.is_user_verified(user_data['id']):

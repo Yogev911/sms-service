@@ -7,11 +7,10 @@ from dal_sql import SQL
 from resources.sender import nexmo_adapter
 from resources.login.service import get_data_by_token
 
-db = SQL()
-
 
 def send_sms(request):
     try:
+        db = SQL()
         token = request.headers.get('token', None)
         if not token:
             return "missing token", 401

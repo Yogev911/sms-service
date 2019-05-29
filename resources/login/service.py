@@ -5,11 +5,11 @@ import traceback
 from dal_sql import SQL
 from utils import generate_token, get_data_by_token
 
-db = SQL()
 
 
 def login(request):
     try:
+        db = SQL()
         token = request.headers.get('token', None)
         if token:
             try:

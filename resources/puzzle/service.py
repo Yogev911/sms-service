@@ -7,11 +7,10 @@ import conf
 from dal_sql import SQL
 from utils import random_question, get_data_by_token
 
-db = SQL()
-
 
 def generate_math_question(request):
     try:
+        db = SQL()
         token = request.headers.get('token', None)
         if not token:
             return "missing token", 401
@@ -33,6 +32,7 @@ def generate_math_question(request):
 
 def submit(request):
     try:
+        db = SQL()
         token = request.headers.get('token', None)
         if not token:
             return "missing token", 401
@@ -50,7 +50,7 @@ def submit(request):
             current_balance = db.get_user_balance(user_id=user_data['user_id'])
             db.update_balance(user_id=user_data['user_id'], new_balance=current_balance + puzzle['reword'])
             db.delete_puzzle_by_id(puzzle['id'])
-            return f"Super! you just earned {puzzle['reword']} coins! " , 200
+            return f"Super! you just earned {puzzle['reword']} coins! ", 200
         else:
             return "Not this time buddy... try again", 406
     except:
