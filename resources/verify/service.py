@@ -16,4 +16,4 @@ def verify(user, pin):
             return 'Account activated successfully', 200
         return 'PIN code is incorrect, try again', 401
     except:
-        return f'Failed verify account {traceback.format_exc()}', 401
+        return f'Failed verify account {traceback.format_exc()}', 501

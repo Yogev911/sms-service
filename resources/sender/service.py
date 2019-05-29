@@ -30,4 +30,4 @@ def send_sms(request):
 
         return "sms sent", 201
     except:
-        return f'Failed sending message {traceback.format_exc()}', 401
+        return f'Failed sending message {traceback.format_exc()}', 501

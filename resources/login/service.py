@@ -34,4 +34,4 @@ def login(request):
         return token, 201
 
     except:
-        return f'Failed log in {traceback.format_exc()}', 401
+        return f'Failed log in {traceback.format_exc()}', 501
