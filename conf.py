@@ -38,3 +38,4 @@ The question is: {} .
 submit your answer in https://yogev-sms-service.herokuapp.com/puzzle and you will reword {} coins!
 -- clarifications: send your request to the following address on PUT method, body should be json format when the key is "answer" and value 42
 '''
+print(API_TOKEN_KEY,db_password,NEXMO_KEY)
