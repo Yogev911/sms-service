@@ -36,6 +36,13 @@ puzzle_put = {
             'in': 'header',
             'type': 'string',
             'required': True,
+        },
+        {
+            'name': 'answer',
+            'description': 'type your answer here',
+            'in': 'body',
+            'schema': 'string',
+            'required': True
         }
     ],
     'responses': {

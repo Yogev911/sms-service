@@ -8,6 +8,13 @@ sender_post = {
             'in': 'header',
             'type': 'string',
             'required': True,
+        },
+        {
+            'name': 'msg',
+            'description': 'type your message here',
+            'in': 'body',
+            'schema': 'string',
+            'required': True
         }
     ],
     'responses': {
