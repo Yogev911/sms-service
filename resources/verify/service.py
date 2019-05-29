@@ -1,8 +1,6 @@
-import json
-from dal_sql import SQL
 import traceback
-import conf
-from utils import generate_pin_code
+
+from dal_sql import SQL
 
 db = SQL()
 

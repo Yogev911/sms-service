@@ -116,7 +116,3 @@ class SQL(object):
         # connection is not autocommit by default. So you must commit to save
         # your changes.
         self.db.commit()
-
-if __name__ == '__main__':
-    db = SQL()
-    print(db.get_user_puzzle(16))

@@ -18,11 +18,11 @@ in few seconds you will receive text message with pin code,
 please verify your account to start messaging via http://localhost:8080/verify/<user>/<pin_code>
 '''
 
-SEND_PIN_MESSAGE = 'Yogev code : {}. valid for 5 minutes'
+SEND_PIN_MESSAGE = 'Hi {} welcome!, here is your pin code : {}. its valid for the next 5 minutes'
 
 PUZZLE_RESPONSE = '''
 Solve this question and get reworded!
 The question is: {} .
 submit your answer in http://localhost:8080/puzzle and you will reword {} coins!
--- clarifications: send your request to the following address on PUT method, body should be json format /{ "answer" : 42/}
+-- clarifications: send your request to the following address on PUT method, body should be json format when the key is "answer" and value 42
 '''

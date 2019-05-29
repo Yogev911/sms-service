@@ -1,12 +1,11 @@
-import json
-
 import jwt
-
-from dal_sql import SQL
-from resources.login.service import get_data_by_token
-from resources.sender import nexmo_adapter
+import json
 import traceback
+
 import conf
+from dal_sql import SQL
+from resources.sender import nexmo_adapter
+from resources.login.service import get_data_by_token
 
 db = SQL()
 
@@ -25,6 +24,7 @@ def send_sms(request):
             return 'Balance is empty.. load up with some kins to keep running', 402
         data = json.loads(request.data)
         res = nexmo_adapter.send(src=user_data['phone'], dest=data['dest'], msg=data['msg'])
+        print(res)
         db.log_message(user_id=user_data['user_id'], dest_number=data['dest'], message=data['msg'])
         db.update_balance(user_id=user_data['user_id'], new_balance=current_balance - conf.SMS_COST)
 

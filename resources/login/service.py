@@ -1,8 +1,8 @@
-import json
-from dal_sql import SQL
 import jwt
-import conf
+import json
 import traceback
+
+from dal_sql import SQL
 from utils import generate_token, get_data_by_token
 
 db = SQL()

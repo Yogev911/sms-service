@@ -1,11 +1,10 @@
-import json
-
 import jwt
-
-from dal_sql import SQL
+import json
 import traceback
-import conf
 from random import randint
+
+import conf
+from dal_sql import SQL
 from utils import random_question, get_data_by_token
 
 db = SQL()
@@ -27,7 +26,7 @@ def generate_math_question(request):
         question, answer = random_question()
         reword = randint(1, 5)
         db.set_puzzle(user_id['id'], question, answer, reword)
-        return conf.PUZZLE_RESPONSE.format(question,reword), 201
+        return conf.PUZZLE_RESPONSE.format(question, reword), 201
     except:
         return f'Failed generate puzzle.. try again later {traceback.format_exc()}', 501
 
