@@ -1,9 +1,17 @@
-# System configuration
-# google_api_token = '&key=AIzaSyBLT0yiIBSyM_l0PvIp7cH1rbPnfPfcETM'
-db_user = 'root'
-db_password = ''
-db_schema_name = 'sms'
-db_hostname = 'localhost'
+# DB configuration
+# local
+# db_user = 'root'
+# db_password = ''
+# db_schema_name = 'sms'
+# db_hostname = 'localhost'
+# db_port = 3306
+
+
+# remote
+db_user = '7mnLL3HbSb'
+db_password = 'RRuldgiBG6'
+db_schema_name = '7mnLL3HbSb'
+db_hostname = 'remotemysql.com'
 db_port = 3306
 
 API_TOKEN_KEY = 'thisismykey'
