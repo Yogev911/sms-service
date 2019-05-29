@@ -1,8 +1,8 @@
 import nexmo
-
+import conf
 
 def send(src, dest, msg):
-    client = nexmo.Client(key='3fdf633b', secret='mVZW9LHrKGS7IFn7')
+    client = nexmo.Client(key=conf.NEXMO_KEY, secret=conf.NEXMO_SECRET)
     res = client.send_message({
         'from': src,
         'to': dest,
