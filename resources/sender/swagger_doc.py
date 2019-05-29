@@ -1,3 +1,5 @@
+from resources.common_modles import Message
+
 sender_post = {
     'tags': ['sender'],
     'description': 'send sms',
@@ -10,10 +12,10 @@ sender_post = {
             'required': True,
         },
         {
-            'name': 'msg',
-            'description': 'type your message here',
+            'name': 'mesage',
+            'description': 'message model',
             'in': 'body',
-            'schema': 'string',
+            'schema': Message,
             'required': True
         }
     ],

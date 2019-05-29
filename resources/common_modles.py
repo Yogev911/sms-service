@@ -14,3 +14,15 @@ class UserModel(Schema):
             'type': 'string'
         }
     }
+
+
+class Message(Schema):
+    type = 'object'
+    properties = {
+        'msg': {
+            'type': 'string'
+        },
+        'dest': {
+            'type': 'string'
+        }
+    }
