@@ -90,9 +90,33 @@ class SQL(object):
             cursor.execute(sql)
             return cursor.fetchone()
 
+    def set_puzzle(self, user_id, question, answer, reword):
+        with self.db.cursor() as cursor:
+            # Create a new record
+            sql = f"INSERT INTO puzzles (`user_id`, `question`,`answer`,`reword`) VALUES (%s,%s,%s,%s)"
+            cursor.execute(sql, (user_id, question, answer, reword))
+
+        # connection is not autocommit by default. So you must commit to save
+        # your changes.
+        self.db.commit()
+
+    def get_user_puzzle(self, user_id):
+        with self.db.cursor() as cursor:
+            # Create a new record
+            sql = f"SELECT * FROM puzzles WHERE `user_id`={user_id}"
+            cursor.execute(sql)
+            return cursor.fetchone()
+
+    def delete_puzzle_by_id(self, puzzle_id):
+        with self.db.cursor() as cursor:
+            # Create a new record
+            sql = f"DELETE FROM puzzles WHERE `id` = {puzzle_id}"
+            cursor.execute(sql)
+
+        # connection is not autocommit by default. So you must commit to save
+        # your changes.
+        self.db.commit()
 
 if __name__ == '__main__':
     db = SQL()
-    print(db.is_user_verified(11))
-    db.verify_user(11)
-    print(db.is_user_verified(11))
+    print(db.get_user_puzzle(16))
