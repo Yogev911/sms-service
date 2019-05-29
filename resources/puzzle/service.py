@@ -44,6 +44,8 @@ def submit(request):
         answer = data.get('answer')
 
         puzzle = db.get_user_puzzle(user_data['user_id'])
+        if not puzzle:
+            return 'No questions waiting for you.. try use GET method to generate new question', 404
         if puzzle['answer'] == answer:
             current_balance = db.get_user_balance(user_id=user_data['user_id'])
             db.update_balance(user_id=user_data['user_id'], new_balance=current_balance + puzzle['reword'])
