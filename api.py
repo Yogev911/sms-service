@@ -15,10 +15,10 @@ CORS(app)
 api = Api(app, api_version='0.1')
 
 api.add_resource(Login, "/login")
-api.add_resource(Sender, "/send")
 api.add_resource(Register, "/register")
-api.add_resource(Verify, "/verify/<string:user>/<int:pin>")
 api.add_resource(Puzzle, "/puzzle")
+api.add_resource(Verify, "/verify/<string:user>/<int:pin>")
+api.add_resource(Sender, "/send")
 
 
 if __name__ == '__main__':

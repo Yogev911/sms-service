@@ -6,6 +6,7 @@ verify_post = {
             'name': 'user',
             'description': 'Request users username',
             'in': 'path',
+            'type': 'key',
             'schema': 'string',
             'required': True,
         },
@@ -13,6 +14,7 @@ verify_post = {
             'name': 'pin',
             'description': 'Request users pin code',
             'in': 'path',
+            'type': 'key',
             'schema': 'string',
             'required': True
         }

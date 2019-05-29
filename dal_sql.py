@@ -8,12 +8,13 @@ import conf
 
 class SQL(object):
     def __init__(self):
-        self.db = pymysql.connect(host=conf.db_hostname,
-                                  user=conf.db_user,
-                                  password=conf.db_password,
-                                  db=conf.db_schema_name,
-                                  charset='utf8mb4',
-                                  cursorclass=pymysql.cursors.DictCursor)
+        # self.db = pymysql.connect(host=conf.db_hostname,
+        #                           user=conf.db_user,
+        #                           password=conf.db_password,
+        #                           db=conf.db_schema_name,
+        #                           charset='utf8mb4',
+        #                           cursorclass=pymysql.cursors.DictCursor)
+        pass
 
     def add_user(self, user, password, phone, pin):
         with self.db.cursor() as cursor:
