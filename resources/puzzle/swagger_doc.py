@@ -6,8 +6,7 @@ puzzle_get = {
             'name': 'token',
             'description': 'authentication token',
             'in': 'header',
-            'type': 'key',
-            'schema': 'string',
+            'type': 'string',
             'required': True,
         }
     ],
@@ -35,8 +34,7 @@ puzzle_put = {
             'name': 'token',
             'description': 'authentication token',
             'in': 'header',
-            'type': 'key',
-            'schema': 'string',
+            'type': 'string',
             'required': True,
         }
     ],

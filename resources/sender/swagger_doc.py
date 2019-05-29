@@ -6,8 +6,7 @@ sender_post = {
             'name': 'token',
             'description': 'authentication token',
             'in': 'header',
-            'type': 'key',
-            'schema': 'string',
+            'type': 'string',
             'required': True,
         }
     ],
