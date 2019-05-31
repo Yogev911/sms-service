@@ -1,16 +1,14 @@
-import datetime
 import pymysql.cursors
 
 import conf
 
 
-# Connect to the database
 class DbClient(object):
     def __init__(self):
-        self.db = pymysql.connect(host=conf.db_hostname,
-                                  user=conf.db_user,
-                                  password=conf.db_password,
-                                  db=conf.db_schema_name,
+        self.db = pymysql.connect(host=conf.DB_HOST,
+                                  user=conf.DB_USER,
+                                  password=conf.DB_PASSWORD,
+                                  db=conf.DB_SCHEMA,
                                   charset='utf8mb4',
                                   cursorclass=pymysql.cursors.DictCursor,
                                   autocommit=True)

@@ -1,30 +1,33 @@
 import os
 
-# DB configuration
 # local
-db_user = 'root'
-db_password = ''
-db_schema_name = 'sms'
-db_hostname = 'localhost'
-db_port = 3306
-LOG_TABLE = 'logs'
-# remote
-# db_schema_name = os.environ.get('db_schema_name', None)
-# db_password = os.environ.get('db_password', None)
-# db_user = os.environ.get('db_user', None)
-# db_hostname = 'remotemysql.com'
+# db_user = 'root'
+# db_password = ''
+# db_schema_name = 'sms'
+# db_hostname = 'localhost'
 # db_port = 3306
-HOST = 'https://yogev-sms-service.herokuapp.com'
-API_TOKEN_KEY = os.environ.get('API_TOKEN_KEY', 'thisismykey')
+# LOG_TABLE = 'logs'
 
+# DB configuration
+
+DB_HOST = 'remotemysql.com'
+DB_PORT = 3306
+DB_SCHEMA = os.environ.get('db_schema_name', None)
+DB_PASSWORD = os.environ.get('db_password', None)
+DB_USER = os.environ.get('db_user', None)
+
+API_TOKEN_KEY = os.environ.get('API_TOKEN_KEY', None)
+NEXMO_SECRET = os.environ.get('NEXMO_SECRET', None)
+NEXMO_KEY = os.environ.get('NEXMO_KEY', None)
+
+# App config
 ALGO = 'HS256'
-
-NEXMO_SECRET = os.environ.get('NEXMO_SECRET', '3fdf633b')
-NEXMO_KEY = os.environ.get('NEXMO_KEY', 'mVZW9LHrKGS7IFn7')
 INIT_BALANCE = 5
 SMS_COST = 2
 PHONE_NUMBER_PREFIX = '9725'
 PHONE_NUMBER_LENGHT = 12
+
+# Messages
 REGISTER_MESSAGE = '''
 Wellcome {}!, you are now a new member, 
 in few seconds you will receive text message with pin code,
