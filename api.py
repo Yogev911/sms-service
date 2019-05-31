@@ -7,7 +7,9 @@ from resources.sender.sender import Sender
 from resources.register.register import Register
 from resources.verify.verify import Verify
 from resources.puzzle.puzzle import Puzzle
+from utilities.logger import get_logger
 
+logger = get_logger(__name__)
 
 app = Flask(__name__)
 
@@ -20,6 +22,6 @@ api.add_resource(Puzzle, "/puzzle")
 api.add_resource(Verify, "/verify/<string:user>/<int:pin>")
 api.add_resource(Sender, "/send")
 
-
 if __name__ == '__main__':
+    logger.info('Starting API')
     app.run(host="0.0.0.0", port=8080)

@@ -1,37 +1,37 @@
-import jwt
+import conf
 import json
-import traceback
 
-from dal_sql import SQL
-from utils import generate_token, get_data_by_token
+from utilities.dal import DbClient
+from utilities.logger import get_logger
+from utilities.utils import generate_token
 
+db = DbClient()
+logger = get_logger(__name__)
 
 
 def login(request):
     try:
-        db = SQL()
-        token = request.headers.get('token', None)
-        if token:
-            try:
-                get_data_by_token(token)
-            except jwt.ExpiredSignatureError:
-                return "Token is expired!, insert credentials again and dismiss the old token", 401
         data = json.loads(request.data)
         user = data.get('user', None)
         password = data.get('password', None)
-        phone = data.get('phone', None)
-        if not user and password and phone:
-            return "missing parameters", 401
+        if not (user and password):
+            logger.info(f'Login failed on {request.remote_addr}, missing credentials')
+            return "missing credentials", 401
 
-        user_data = db.get_user_by_params(user)
+        user_data = db.get_user_by_username(user)
         if not user_data:
+            logger.info(f'User {user} not exists')
             return 'User not exists', 404
-        if not (user_data['user'] == user and user_data['password'] == password):
+        elif not (user_data['user'] == user and user_data['password'] == password):
+            logger.info(f'Invalid credentials for user {user}')
             return 'Invalid credentials', 401
-        if not db.is_user_verified(user_data['id']):
-            return 'Account is not verified, please verify your account to start messaging via http://localhost:8080/verify/<user_id>/<pin_code>', 401
-        token = generate_token(user_data['id'], phone)
-        return token, 201
-
-    except:
-        return f'Failed log in {traceback.format_exc()}', 501
+        elif not user_data['verify']:
+            logger.info(f'Account for user {user} is not verified')
+            return conf.ACCOUNT_NOT_VERIFIED, 401
+        else:
+            token = generate_token(user_data['id'], user_data['phone'])
+            logger.info(f'Token for user {user} created. token: {token}')
+            return token, 201
+    except Exception as e:
+        logger.exception(f'Failed login from {request.remote_addr}, Error: {e.__str__()} ')
+        return f'Failed login {e.__str__()}', 501
