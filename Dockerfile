@@ -1,7 +1,7 @@
-FROM ubuntu:16.04
+FROM python:3
 RUN apt-get update -y && apt-get install -y python3-pip python3-dev
-COPY ./ ./app
-WORKDIR ./app
-RUN pip3 install -r ./app/requirements.txt
+COPY . /app
+WORKDIR /app
+RUN pip3 install -r /app/requirements.txt
 EXPOSE 8080
-CMD ["python", "api.py"]
+CMD ["python", "-u" ,"api.py",  "--host", "0.0.0.0"]

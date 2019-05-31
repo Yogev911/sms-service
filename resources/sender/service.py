@@ -6,6 +6,7 @@ from utilities.dal import DbClient
 from resources.sender import nexmo_adapter
 from utilities.logger import get_logger
 from utilities.utils import get_data_by_token
+from utilities.exceptions import *
 
 db = DbClient()
 logger = get_logger(__name__)
@@ -16,19 +17,25 @@ def send_sms(request):
         logger.info(f'Sending sms')
         token = request.headers.get('token', None)
         if not token:
-            logger.info(f'Missing token on {request.remote_addr}')
-            return "Missing token", 401
+            raise TokenNotExists()
+
         user_data = get_data_by_token(token)
         current_balance = db.get_user_balance(user_id=user_data['user_id'])
         if current_balance - conf.SMS_COST <= 0:
-            logger.info(f'User {user_data["user_id"]} balance is below of {conf.SMS_COST}')
-            return 'Balance is empty.. load up with some kins to keep running', 402
+            raise EmptyBalance(f'Balance for {user_data["phone"]} balance is below of {conf.SMS_COST}')
         else:
             data = json.loads(request.data)
             if not data or not ('msg' in data and 'dest' in data):
                 raise ValueError('Empty data')
             _send_sms(current_balance, data['msg'], data['dest'], user_data['phone'], user_data['user_id'])
         return "sms sent", 201
+
+    except EmptyBalance as e:
+        logger.warning(e.__str__())
+        return e.__str__(), 402
+    except TokenNotExists as e:
+        logger.warning(e.__str__())
+        return e.__str__(), 401
     except jwt.ExpiredSignatureError:
         logger.exception(f'Token is not authenticated! on request {request.remote_addr}')
         return "Token is not authenticated!, log in again", 401

@@ -42,7 +42,7 @@ class TestPuzzleMethods(unittest.TestCase):
         # Generate new puzzle
         get_user_puzzle.return_value = None
         res = generate_math_question(request)
-        self.assertEqual(res[1], 201)
+        self.assertEqual(res[1], 200)
 
     @patch("utilities.dal.DbClient.get_user_puzzle")
     @patch("resources.puzzle.service.solve_puzzle")

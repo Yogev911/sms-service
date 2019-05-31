@@ -15,7 +15,7 @@ class LogDBHandler(logging.Handler):
         self.db_tbl_log = db_tbl_log
 
     def emit(self, record):
-        self.log_msg = record.msgF
+        self.log_msg = record.msg
         self.log_msg = self.log_msg.strip()
         self.log_msg = self.log_msg.replace('\'', '\'\'')
         sql = f'INSERT INTO {self.db_tbl_log} (level, log, module) VALUES (%s,%s,%s)'

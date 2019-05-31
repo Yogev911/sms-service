@@ -1,6 +1,7 @@
 import nexmo
 import conf
 from utilities.logger import get_logger
+from utilities.exceptions import SMSSendError
 import json
 
 logger = get_logger(__name__)
@@ -16,4 +17,5 @@ def send(src, dest, msg):
     }
     )
     logger.info(f'SMS sent via NEXMO, {json.dumps(res)}')
-    return res
+    if res['status'] != '0':
+        raise SMSSendError(res['error-text'])

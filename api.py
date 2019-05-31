@@ -7,6 +7,7 @@ from resources.sender.sender import Sender
 from resources.register.register import Register
 from resources.verify.verify import Verify
 from resources.puzzle.puzzle import Puzzle
+from resources.balance.balance import Balance
 from utilities.logger import get_logger
 
 logger = get_logger(__name__)
@@ -21,6 +22,7 @@ api.add_resource(Register, "/register")
 api.add_resource(Puzzle, "/puzzle")
 api.add_resource(Verify, "/verify/<string:user>/<int:pin>")
 api.add_resource(Sender, "/send")
+api.add_resource(Balance, "/user/balance")
 
 if __name__ == '__main__':
     logger.info('Starting API')
