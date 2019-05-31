@@ -1,4 +1,5 @@
 from resources.common_modles import UserModel
+
 register_post = {
     'tags': ['register'],
     'description': 'register new user',
