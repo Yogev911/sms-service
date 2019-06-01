@@ -1,37 +1,51 @@
-import jwt
 import json
-import traceback
 
-from dal_sql import SQL
-from utils import generate_token, get_data_by_token
+from utilities.dal import DbClient
+from utilities.logger import Logger
+from utilities.utils import generate_token
+from utilities.exceptions import *
 
+db = DbClient()
+logger = Logger(__name__)
 
 
 def login(request):
+    '''
+    POST login to system and generate JWT token
+    :param request: flask request object
+    '''
     try:
-        db = SQL()
-        token = request.headers.get('token', None)
-        if token:
-            try:
-                get_data_by_token(token)
-            except jwt.ExpiredSignatureError:
-                return "Token is expired!, insert credentials again and dismiss the old token", 401
         data = json.loads(request.data)
-        user = data.get('user', None)
-        password = data.get('password', None)
-        phone = data.get('phone', None)
-        if not user and password and phone:
-            return "missing parameters", 401
+        user = data.get('user')
+        password = data.get('password')
+        if not (user and password):
+            logger.info(f'Login failed on {request.remote_addr}, missing credentials')
+            raise InvalidCredentials(user, password)
 
-        user_data = db.get_user_by_params(user)
+        user_data = db.get_user_by_username(user)
         if not user_data:
-            return 'User not exists', 404
-        if not (user_data['user'] == user and user_data['password'] == password):
-            return 'Invalid credentials', 401
-        if not db.is_user_verified(user_data['id']):
-            return 'Account is not verified, please verify your account to start messaging via http://localhost:8080/verify/<user_id>/<pin_code>', 401
-        token = generate_token(user_data['id'], phone)
-        return token, 201
+            raise UserNotExists(user)
 
-    except:
-        return f'Failed log in {traceback.format_exc()}', 501
+        elif not (user_data['user'] == user and user_data['password'] == password):
+            raise InvalidCredentials(user)
+
+        elif not user_data['verify']:
+            raise UserNotVerified()
+
+        else:
+            token = generate_token(user_data['id'], user_data['phone'])
+            logger.info(f'Token for user {user} created. token: {token}')
+            return token, 201
+
+    except UserNotVerified as e:
+        logger.warning(e.__str__())
+        return e.__str__(), 401
+    except UserNotExists as e:
+        logger.warning(e.__str__())
+        return e.__str__(), 404
+    except InvalidCredentials as e:
+        logger.warning(e.__str__())
+        return e.__str__(), 401
+    except Exception as e:
+        logger.exception(f'Failed login from {request.remote_addr}')
+        return f'Failed login {e.__str__()}', 501

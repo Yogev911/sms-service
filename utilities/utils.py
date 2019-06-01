@@ -13,15 +13,24 @@ OPERATIONS = [
 
 
 def generate_token(user_id, phone):
+    '''
+    generate JWT token from id and phone number
+    :param user_id: int
+    :param phone: str
+    :return: str
+    '''
     return jwt.encode(
         {'user_id': user_id, 'phone': phone, 'exp': datetime.utcnow() + timedelta(days=1)},
-        conf.API_TOKEN_KEY,
-        algorithm=conf.ALGO).decode('utf-8')
+        conf.API_TOKEN_KEY, algorithm=conf.ALGO).decode('utf-8')
 
 
 def get_data_by_token(token):
-    return jwt.decode(token, conf.API_TOKEN_KEY,
-                      algorithm='HS256')
+    '''
+    decode JWT token to dict
+    :param token: str
+    :return: dict
+    '''
+    return jwt.decode(token, conf.API_TOKEN_KEY, algorithm=conf.ALGO)
 
 
 def generate_pin_code():
@@ -29,6 +38,10 @@ def generate_pin_code():
 
 
 def random_question():
+    '''
+    generate math question
+    :return: (str,str) - > question and answer
+    '''
     binary_operations, operand_range = OPERATIONS, range(0, 21)
     op_sym, op_func = random.choice(binary_operations)
     n1 = random.randint(min(operand_range), max(operand_range))

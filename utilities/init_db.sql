@@ -37,3 +37,13 @@ create table puzzles
 	constraint puzzles_users_id_fk
 		foreign key (user_id) references users (id)
 );
+
+create table logs
+(
+    id         int auto_increment
+        primary key,
+    level      varchar(255)                        null,
+    log        varchar(2048)                       null,
+    created_at timestamp default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP,
+    module     varchar(128)                        not null
+);
