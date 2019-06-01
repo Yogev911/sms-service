@@ -1,10 +1,10 @@
 import nexmo
 import conf
-from utilities.logger import get_logger
+from utilities.logger import Logger
 from utilities.exceptions import SMSSendError
 import json
 
-logger = get_logger(__name__)
+logger = Logger(__name__)
 
 client = nexmo.Client(key=conf.NEXMO_KEY, secret=conf.NEXMO_SECRET)
 

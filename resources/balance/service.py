@@ -1,12 +1,12 @@
 import jwt
 
 from utilities.dal import DbClient
-from utilities.logger import get_logger
+from utilities.logger import Logger
 from utilities.exceptions import *
 from utilities.utils import get_data_by_token
 
 db = DbClient()
-logger = get_logger(__name__)
+logger = Logger(__name__)
 
 
 def balance(request):

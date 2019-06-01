@@ -8,9 +8,9 @@ from resources.register.register import Register
 from resources.verify.verify import Verify
 from resources.puzzle.puzzle import Puzzle
 from resources.balance.balance import Balance
-from utilities.logger import get_logger
+from utilities.logger import Logger
 
-logger = get_logger(__name__)
+logger = Logger(__name__)
 
 app = Flask(__name__)
 
@@ -26,4 +26,4 @@ api.add_resource(Balance, "/user/balance")
 
 if __name__ == '__main__':
     logger.info('Starting API')
-    app.run(host="0.0.0.0", port=8080)
+    app.run(host="0.0.0.0", port=5000)

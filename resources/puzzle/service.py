@@ -4,12 +4,12 @@ from random import randint
 
 import conf
 from utilities.dal import DbClient
-from utilities.logger import get_logger
+from utilities.logger import Logger
 from utilities.utils import random_question, get_data_by_token
 from utilities.exceptions import *
 
 db = DbClient()
-logger = get_logger(__name__)
+logger = Logger(__name__)
 
 
 def generate_math_question(request):

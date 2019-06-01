@@ -28,17 +28,32 @@ class LogDBHandler(logging.Handler):
             raise
 
 
-def get_logger(name, tbl=conf.LOG_TABLE):
-    connection = pymysql.connect(host=conf.DB_HOST,
-                                 user=conf.DB_USER,
-                                 password=conf.DB_PASSWORD,
-                                 db=conf.DB_SCHEMA,
-                                 charset='utf8mb4',
-                                 cursorclass=pymysql.cursors.DictCursor,
-                                 autocommit=True)
-    log_cursor = connection.cursor()
-    logdb = LogDBHandler(connection, log_cursor, tbl)
-    log = logging.getLogger(name)
-    log.addHandler(logdb)
-    log.setLevel('DEBUG')
-    return log
+class Logger:
+    def __init__(self, name, tbl=conf.LOG_TABLE):
+        connection = pymysql.connect(host=conf.DB_HOST,
+                                     user=conf.DB_USER,
+                                     password=conf.DB_PASSWORD,
+                                     db=conf.DB_SCHEMA,
+                                     charset='utf8mb4',
+                                     cursorclass=pymysql.cursors.DictCursor,
+                                     autocommit=True)
+        log_cursor = connection.cursor()
+        logdb = LogDBHandler(connection, log_cursor, tbl)
+        self.log = logging.getLogger(name)
+        self.log.addHandler(logdb)
+        self.log.setLevel('DEBUG')
+
+    def debug(self, message):
+        self.log.debug(message)
+
+    def info(self, message):
+        self.log.info(message)
+
+    def warning(self, message):
+        self.log.warning(message)
+
+    def error(self, message):
+        self.log.error(message)
+
+    def exception(self, message):
+        self.log.exception(message)

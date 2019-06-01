@@ -2,21 +2,21 @@ import json
 
 import conf
 from utilities.dal import DbClient
-from utilities.logger import get_logger
+from utilities.logger import Logger
 from utilities.utils import generate_pin_code
 from resources.sender import nexmo_adapter
 from utilities.exceptions import *
 
 db = DbClient()
-logger = get_logger(__name__)
+logger = Logger(__name__)
 
 
 def register(request):
     try:
-        form = request.args
-        user = form.get('user')
-        password = form.get('password')
-        phone = form.get('phone')
+        data = json.loads(request.data)
+        user = data.get('user')
+        password = data.get('password')
+        phone = data.get('phone')
         if not (user and password and phone):
             raise EmptyForm()
 

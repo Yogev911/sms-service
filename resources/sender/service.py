@@ -4,12 +4,12 @@ import json
 import conf
 from utilities.dal import DbClient
 from resources.sender import nexmo_adapter
-from utilities.logger import get_logger
+from utilities.logger import Logger
 from utilities.utils import get_data_by_token
 from utilities.exceptions import *
 
 db = DbClient()
-logger = get_logger(__name__)
+logger = Logger(__name__)
 
 
 def send_sms(request):

@@ -1,5 +1,4 @@
 import unittest
-from unittest.mock import patch
 
 from utilities.utils import generate_pin_code, generate_token, get_data_by_token
 

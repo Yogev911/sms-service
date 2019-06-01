@@ -1,19 +1,19 @@
 import json
 
 from utilities.dal import DbClient
-from utilities.logger import get_logger
+from utilities.logger import Logger
 from utilities.utils import generate_token
 from utilities.exceptions import *
 
 db = DbClient()
-logger = get_logger(__name__)
+logger = Logger(__name__)
 
 
 def login(request):
     try:
-        form = request.args
-        user = form.get('user', None)
-        password = form.get('password', None)
+        data = json.loads(request.data)
+        user = data.get('user')
+        password = data.get('password')
         if not (user and password):
             logger.info(f'Login failed on {request.remote_addr}, missing credentials')
             raise InvalidCredentials(user, password)
