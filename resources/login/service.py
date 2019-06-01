@@ -10,6 +10,10 @@ logger = Logger(__name__)
 
 
 def login(request):
+    '''
+    POST login to system and generate JWT token
+    :param request: flask request object
+    '''
     try:
         data = json.loads(request.data)
         user = data.get('user')

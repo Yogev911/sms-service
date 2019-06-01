@@ -13,6 +13,10 @@ logger = Logger(__name__)
 
 
 def send_sms(request):
+    '''
+    POST sms message
+    :param request: flask request object
+    '''
     try:
         logger.info(f'Sending sms')
         token = request.headers.get('token', None)

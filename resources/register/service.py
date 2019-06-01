@@ -12,6 +12,10 @@ logger = Logger(__name__)
 
 
 def register(request):
+    '''
+    POST register new user
+    :param request: flask request object
+    '''
     try:
         data = json.loads(request.data)
         user = data.get('user')

@@ -7,6 +7,11 @@ logger = Logger(__name__)
 
 
 def verify(user, pin):
+    '''
+    PUT user verification PIN code
+    :param user: str
+    :param pin: str
+    '''
     try:
         logger.info(f'Verify {user} PIN Code')
         user_data = db.get_user_by_username(user)

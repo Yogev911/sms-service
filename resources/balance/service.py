@@ -10,6 +10,10 @@ logger = Logger(__name__)
 
 
 def balance(request):
+    '''
+    Get user current balance
+    :param request: flask request object
+    '''
     try:
         logger.info(f'Get user current balance')
         token = request.headers.get('token', None)

@@ -13,6 +13,10 @@ logger = Logger(__name__)
 
 
 def generate_math_question(request):
+    '''
+    Get user math question
+    :param request: flask request object
+    '''
     token = None
     try:
         logger.info('Generating math question')
@@ -69,6 +73,10 @@ def set_new_question(user):
 
 
 def submit(request):
+    '''
+    PUT user answer for latest question
+    :param request: flask request object
+    '''
     token = None
     try:
         logger.info('Submit puzzle answer')
