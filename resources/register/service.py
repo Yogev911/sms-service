@@ -13,7 +13,7 @@ logger = get_logger(__name__)
 
 def register(request):
     try:
-        form = request.form
+        form = request.args
         user = form.get('user')
         password = form.get('password')
         phone = form.get('phone')
@@ -46,6 +46,13 @@ def is_phone_valid(phone_number):
 
 
 def register_new_user(password, phone, user):
+    '''
+    register new user in db and send the verification message
+    :param password: str
+    :param phone: str
+    :param user: str
+    :return: None
+    '''
     logger.info(f'Adding new user {user}')
     pin = generate_pin_code()
     nexmo_adapter.send(src='Nexmo', dest=phone, msg=conf.SEND_PIN_MESSAGE.format(user, pin))

@@ -17,5 +17,5 @@ def send(src, dest, msg):
     }
     )
     logger.info(f'SMS sent via NEXMO, {json.dumps(res)}')
-    if res['status'] != '0':
-        raise SMSSendError(res['error-text'])
+    if res['messages'][0]['status'] != '0':
+        raise SMSSendError(res['messages'][0]['error-text'])

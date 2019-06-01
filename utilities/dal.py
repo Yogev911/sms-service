@@ -5,6 +5,7 @@ import conf
 
 class DbClient(object):
     def __init__(self):
+        self.connection = None
         self.connection = pymysql.connect(host=conf.DB_HOST,
                                           user=conf.DB_USER,
                                           password=conf.DB_PASSWORD,
@@ -14,7 +15,8 @@ class DbClient(object):
                                           autocommit=True)
 
     def __del__(self):
-        self.connection.close()
+        if self.connection:
+            self.connection.close()
 
     def add_user(self, user, password, phone, pin):
         try:

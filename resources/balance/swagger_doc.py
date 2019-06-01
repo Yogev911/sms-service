@@ -1,6 +1,6 @@
 balance_get = {
     'tags': ['balance'],
-    'description': 'get user current balance',
+    'description': 'Get user current balance',
     'parameters': [
         {
             'name': 'token',
@@ -12,7 +12,7 @@ balance_get = {
     ],
     'responses': {
         '200': {
-            'description': 'Account activated successfully',
+            'description': 'User balance amount',
         },
         '401': {
             'description': 'Token is not authenticated'

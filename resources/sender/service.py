@@ -45,6 +45,15 @@ def send_sms(request):
 
 
 def _send_sms(current_balance, message, dest_number, src_number, user_id):
+    '''
+    sending sms message via nexmo adapter
+    :param current_balance: int
+    :param message: str
+    :param dest_number: str
+    :param src_number: str
+    :param user_id: int
+    :return: None
+    '''
     nexmo_adapter.send(src=src_number, dest=dest_number, msg=message)
     db.log_message(user_id=user_id, dest_number=dest_number, message=message)
     db.update_balance(user_id=user_id, new_balance=current_balance - conf.SMS_COST)

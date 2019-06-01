@@ -11,7 +11,7 @@ logger = get_logger(__name__)
 
 def login(request):
     try:
-        form = request.form
+        form = request.args
         user = form.get('user', None)
         password = form.get('password', None)
         if not (user and password):
