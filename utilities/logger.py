@@ -36,7 +36,8 @@ class Logger:
                                      db=conf.DB_SCHEMA,
                                      charset='utf8mb4',
                                      cursorclass=pymysql.cursors.DictCursor,
-                                     autocommit=True)
+                                     autocommit=True,
+                                     connect_timeout=31536000)
         log_cursor = connection.cursor()
         logdb = LogDBHandler(connection, log_cursor, tbl)
         self.log = logging.getLogger(name)

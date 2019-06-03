@@ -12,7 +12,8 @@ class DbClient(object):
                                           db=conf.DB_SCHEMA,
                                           charset='utf8mb4',
                                           cursorclass=pymysql.cursors.DictCursor,
-                                          autocommit=True)
+                                          autocommit=True,
+                                          connect_timeout=31536000)
 
     def __del__(self):
         if self.connection:
