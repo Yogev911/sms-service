@@ -20,7 +20,7 @@ def register(request):
         data = json.loads(request.data)
         user = data.get('user')
         password = data.get('password')
-        if not is_phone_valid(password):
+        if not is_password_valid(password):
             raise PasswordInvalid()
         else:
             password = str(encrypt(conf.PASSWORD_ENCRYPTION_KEY, str.encode(password)))
