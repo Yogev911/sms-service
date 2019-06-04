@@ -10,6 +10,7 @@ DB_PASSWORD = os.environ.get('DB_PASSWORD')
 DB_USER = os.environ.get('DB_USER')
 
 API_TOKEN_KEY = os.environ.get('API_TOKEN_KEY')
+PASSWORD_ENCRYPTION_KEY = str.encode(os.environ.get('PASSWORD_ENCRYPTION_KEY'))
 
 NEXMO_SECRET = os.environ.get('NEXMO_SECRET')
 NEXMO_KEY = os.environ.get('NEXMO_KEY')
@@ -21,6 +22,7 @@ SMS_COST = 2
 INIT_BALANCE = 5
 PHONE_NUMBER_LENGHT = 12
 PHONE_NUMBER_PREFIX = '9725'
+PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$"
 
 # Messages
 REGISTER_MESSAGE = '''

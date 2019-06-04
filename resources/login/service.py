@@ -2,8 +2,9 @@ import json
 
 from utilities.dal import DbClient
 from utilities.logger import Logger
-from utilities.utils import generate_token
+from utilities.utils import generate_token, encrypt, decrypt
 from utilities.exceptions import *
+import conf
 
 db = DbClient()
 logger = Logger(__name__)
@@ -26,7 +27,7 @@ def login(request):
         if not user_data:
             raise UserNotExists(user)
 
-        elif not (user_data['user'] == user and user_data['password'] == password):
+        elif not (password == str(decrypt(conf.PASSWORD_ENCRYPTION_KEY, str.encode(user_data['password'])))):
             raise InvalidCredentials(user)
 
         elif not user_data['verify']:

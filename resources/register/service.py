@@ -3,7 +3,7 @@ import json
 import conf
 from utilities.dal import DbClient
 from utilities.logger import Logger
-from utilities.utils import generate_pin_code
+from utilities.utils import generate_pin_code, is_password_valid, encrypt
 from resources.sender import nexmo_adapter
 from utilities.exceptions import *
 
@@ -20,6 +20,10 @@ def register(request):
         data = json.loads(request.data)
         user = data.get('user')
         password = data.get('password')
+        if not is_phone_valid(password):
+            raise PasswordInvalid()
+        else:
+            password = str(encrypt(conf.PASSWORD_ENCRYPTION_KEY, str.encode(password)))
         phone = data.get('phone')
         if not (user and password and phone):
             raise EmptyForm()
@@ -33,6 +37,9 @@ def register(request):
             register_new_user(password, phone, user)
             return conf.REGISTER_MESSAGE.format(user), 201
 
+    except PasswordInvalid as e:
+        logger.warning(e.__str__())
+        return e.__str__(), 401
     except UserAlreadyExists as e:
         logger.warning(e.__str__())
         return e.__str__(), 401

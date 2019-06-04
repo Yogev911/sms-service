@@ -1,7 +1,7 @@
 from flask_restful_swagger_2 import Schema
 
 
-class UserModel(Schema):
+class UserCredential(Schema):
     type = 'object'
     properties = {
         'user': {
@@ -9,6 +9,15 @@ class UserModel(Schema):
         },
         'password': {
             'type': 'string'
+        }
+    }
+
+
+class UserModel(Schema):
+    type = 'object'
+    properties = {
+        'credential': {
+            'type': UserCredential
         },
         'phone': {
             'type': 'string'

@@ -47,3 +47,7 @@ class EmptyBalance(Exception):
     def __init__(self, message):
         super().__init__(message)
 
+
+class PasswordInvalid(Exception):
+    def __init__(self):
+        super().__init__('Password is not matching the requirements')

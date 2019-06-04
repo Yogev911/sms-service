@@ -1,4 +1,4 @@
-from resources.common_modles import UserModel
+from resources.common_modles import UserCredential
 
 login_post = {
     'tags': ['login'],
@@ -8,7 +8,7 @@ login_post = {
             'name': 'user',
             'description': 'Request users credentials',
             'in': 'body',
-            'schema': UserModel,
+            'schema': UserCredential,
             'required': True
         }
     ],
