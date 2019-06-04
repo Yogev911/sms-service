@@ -27,8 +27,7 @@ def login(request):
         if not user_data:
             raise UserNotExists(user)
 
-        elif not (password == str(decrypt(conf.PASSWORD_ENCRYPTION_KEY, user_data['password']))):
-            print(password, str(decrypt(conf.PASSWORD_ENCRYPTION_KEY, user_data['password'])), type(str(decrypt(conf.PASSWORD_ENCRYPTION_KEY, user_data['password']))), type(password))
+        elif not (str.encode(password) == str(decrypt(conf.PASSWORD_ENCRYPTION_KEY, user_data['password']))):
             raise InvalidCredentials(user)
 
         elif not user_data['verify']:
