@@ -1,6 +1,6 @@
 flask_restful_swagger_2==0.35
 Flask==1.0.2
-Flask_Cors==3.0.6
+Flask_Cors==3.0.9
 nexmo==2.3.0
 PyJWT==1.7.1
 pymysql==0.9.3
